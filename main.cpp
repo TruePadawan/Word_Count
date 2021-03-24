@@ -9,7 +9,7 @@
 #include <string>
 #include <iomanip>
 
-// Display the word and count from the 
+// Displays the word and count from the 
 // std::map<std::string, int>
 
 void display_words(const std::map<std::string, int> &words) {
