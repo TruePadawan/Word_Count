@@ -10,7 +10,7 @@
 #include <iomanip>
 #include <vector>
 //DISPLAYS THE LINES WHERE EACH WORD APPEARS ON
-void display_vec(std::set<int> a){
+void display_line(std::set<int> a){
     std::cout << "[ ";
     for(auto b: a)
         std::cout << b << " ";
@@ -24,7 +24,7 @@ void display_words(const std::map<std::string, int> &words, const std::map<std::
     for (auto pair: words){
         std::cout << std::setw(12) << std::left << pair.first 
                        << std::setw(7) << std::right << pair.second << std::setw(15);
-                display_vec(occur.at(pair.first));
+                display_line(occur.at(pair.first));
     }
 }
 
