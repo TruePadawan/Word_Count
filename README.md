@@ -1,4 +1,4 @@
-https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy4GPwGjddG989xsM0cnEMly8Fxhds-33DLw&usqp=CAU
+![image](https://user-images.githubusercontent.com/71678062/112481807-aee80d00-8d77-11eb-81b0-8bb85dade978.png)
 # Word_Count
 This Program dislpays how many times each word in the word.txt file appears and what line they appear on
 # How to Use
