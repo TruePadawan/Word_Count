@@ -8,33 +8,23 @@
 #include <set>
 #include <string>
 #include <iomanip>
-
-// Displays the word and count from the 
-// std::map<std::string, int>
-
-void display_words(const std::map<std::string, int> &words) {
-    std::cout << std::setw(12) << std::left << "\nWord"
-                << std::setw(7) << std::right << "Count"<< std::endl;
-    std::cout << "===================" << std::endl;
-    for (auto pair: words)
-        std::cout << std::setw(12) << std::left << pair.first 
-                       << std::setw(7) << std::right << pair.second << std::endl;
+#include <vector>
+//DISPLAYS THE LINES WHERE EACH WORD APPEARS ON
+void display_vec(std::set<int> a){
+    std::cout << "[ ";
+    for(auto b: a)
+        std::cout << b << " ";
+    std::cout << "]\n";
 }
-
-// Display the word and occurences from the 
-// std::map<std::string, std::set<int>>
-
-void display_words(const std::map<std::string, std::set<int>> &words)
-{
-     std::cout << std::setw(12) << std::left << "\nWord"
-                << "Occurrences"<< std::endl;
-    std::cout << "=====================================================================" << std::endl;
-    for (auto pair: words) {
+//DISPLAYS THE WORD, HOW MANY TIMES IT APPEARS AND THE LINES IT APPEARS ON
+void display_words(const std::map<std::string, int> &words, const std::map<std::string, std::set<int>> &occur) {
+    std::cout << std::setw(12) << std::left << "\nWord"
+                << std::setw(7) << std::right << "Count"<< std::setw(32)<< "Occurrences(lines)" << std::endl;
+    std::cout << std::setw(90) << std::setfill('=') << "" << std::setfill(' ') << std::endl;
+    for (auto pair: words){
         std::cout << std::setw(12) << std::left << pair.first 
-                       << std::left << "[ ";
-        for (auto i: pair.second) 
-            std::cout << i << " ";
-        std::cout << "]" << std::endl;
+                       << std::setw(7) << std::right << pair.second << std::setw(15);
+                display_vec(occur.at(pair.first));
     }
 }
 
@@ -51,60 +41,39 @@ std::string clean_string(const std::string &s) {
     return result;
 }
 
-// Part1 process the file and builds a map of words and the 
-// number of times they occur in the file
+// Part1 process the file and builds a map of words, the 
+// number of times they occur in the file and the lines they appear on
 
 void part1() {
     std::map<std::string, int> words;
     std::string line;       
     std::string word;
-    std::ifstream in_file {"words.txt"};
-    if (in_file) {
-        while(!in_file.eof()){
-            std::getline(in_file, line);
-            std::stringstream ss{line};
-            while(!ss.eof()){
-                ss >> word;
-                word = clean_string(word);
-                if(words.count(word)){
-                    words[word] += 1;
-                }else{
-                    words.insert(std::make_pair(word, 1));
-                }
-            }
-        }
-        in_file.close();
-        display_words(words);
-    } else {
-        std::cerr << "Error opening input file" << std::endl;
-    }
-}
-    
-// Part2 process the file and builds a map of words and a 
-// set of line numbers in which the word appears
-void part2() {
-    std::map<std::string, std::set<int>> words;
-    std::string line;
-    std::string word;
     int num{0};
+    std::map<std::string, std::set<int>> occur;
     std::ifstream in_file {"words.txt"};
     if (in_file) {
         while(!in_file.eof()){
             std::getline(in_file, line);
             num += 1;
             std::stringstream ss{line};
+            
             while(!ss.eof()){
+                std::vector<int> temp;
                 ss >> word;
                 word = clean_string(word);
-                if(words.count(word)){
-                    words[word].insert(num);
+                if(words.count(word)){ //CHECKS TO SEE IF THE WORD IS ALREADY IN THE SET
+                    words[word] += 1;
+                    occur.at(word).insert(num);
                 }else{
-                    words.insert(std::make_pair(word, std::set<int>{num}));
+                    words.insert(std::make_pair(word, 1));
+                    occur.insert(std::make_pair(word, std::set<int>{num}));
                 }
             }
+            
         }
+        
         in_file.close();
-        display_words(words);
+        display_words(words, occur);
     } else {
         std::cerr << "Error opening input file" << std::endl;
     }
@@ -112,7 +81,6 @@ void part2() {
 
 int main() {
     part1();
-    part2();
     return 0;
 }
 
