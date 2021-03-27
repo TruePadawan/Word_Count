@@ -18,12 +18,12 @@ void display_line(std::set<int> a){
 }
 //DISPLAYS THE WORD, HOW MANY TIMES IT APPEARS AND THE LINES IT APPEARS ON
 void display_words(const std::map<std::string, int> &words, const std::map<std::string, std::set<int>> &occur) {
-    std::cout << std::setw(12) << std::left << "\nWord"
-                << std::setw(7) << std::right << "Count"<< std::setw(32)<< "Occurrences(lines)" << std::endl;
-    std::cout << std::setw(90) << std::setfill('=') << "" << std::setfill(' ') << std::endl;
+    std::cout << std::setw(18) << std::left << "\nWord"
+                << std::setw(14) << std::right << "Count"<< std::setw(26)<< "Occurrences(lines)" << std::endl;
+    std::cout << std::setw(96) << std::setfill('=') << "" << std::setfill(' ') << std::endl;
     for (auto pair: words){
-        std::cout << std::setw(12) << std::left << pair.first 
-                       << std::setw(7) << std::right << pair.second << std::setw(15);
+        std::cout << std::setw(18) << std::left << pair.first 
+                       << std::setw(13) << std::right << pair.second << std::setw(10);
                 display_line(occur.at(pair.first));
     }
 }
