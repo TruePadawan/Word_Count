@@ -3,3 +3,7 @@
 *.project
 Word_Count.txt
 tags
+Debug/.d
+Debug/main.cpp.o
+Debug/main.cpp.o.d
+Debug/Word_Count.exe
