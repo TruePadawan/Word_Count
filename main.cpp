@@ -57,10 +57,9 @@ void word_count() {
             std::stringstream ss{line};
             
             while(!ss.eof()){
-                std::vector<int> temp;
                 ss >> word;
                 word = clean_string(word);
-                if(words.count(word)){ //CHECKS TO SEE IF THE WORD IS ALREADY IN THE SET
+                if(words.count(word)){ //CHECKS TO SEE IF THE WORD IS ALREADY IN THE MAP
                     words[word] += 1;
                     occur.at(word).insert(num);
                 }else{
